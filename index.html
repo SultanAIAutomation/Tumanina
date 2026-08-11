@@ -583,6 +583,12 @@
                 activeIndex = progressData[sectionId].currentIndex || 0;
                 activeZikrCount = progressData[sectionId].currentZikrCount || 0;
 
+                if (activeIndex >= currentSection.items.length) {
+                    activeIndex = 0;
+                    activeZikrCount = 0;
+                    saveProgress();
+                }
+
                 document.getElementById('dashboard-view').classList.add('hidden');
                 document.getElementById('completion-view').classList.add('hidden');
                 document.getElementById('zikr-view').classList.remove('hidden');
