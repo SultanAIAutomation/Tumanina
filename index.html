@@ -310,12 +310,13 @@
 
         .controls {
             display: flex;
+            flex-wrap: nowrap;
             align-items: center;
             justify-content: space-between;
             margin-top: 24px;
             padding-top: 16px;
             border-top: 1px solid var(--card-border);
-            gap: 8px;
+            gap: 6px;
         }
 
         .counter-btn {
@@ -327,7 +328,8 @@
             font-size: 18px;
             font-weight: 700;
             cursor: pointer;
-            min-width: 135px;
+            flex: 1;
+            min-width: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -340,7 +342,9 @@
             background-color: var(--card-border);
             color: var(--text-color);
             border: none;
-            padding: 14px 16px;
+            width: 48px;
+            height: 46px;
+            padding: 0;
             border-radius: 16px;
             font-size: 13px;
             font-weight: 700;
@@ -348,7 +352,8 @@
             order: 2;
             display: flex;
             align-items: center;
-            gap: 4px;
+            justify-content: center;
+            flex: 0 0 48px;
         }
 
         .reset-item-btn {
@@ -465,14 +470,12 @@
                         <span id="counter-current">0</span> / <span id="counter-target" style="opacity: 0.7; font-size: 14px;">0</span>
                     </button>
 
-                    <button class="next-btn" onclick="nextZikrManual()">
-                        <span>التالي</span>
+                    <button class="next-btn" onclick="nextZikrManual()" aria-label="الذكر التالي">
                         <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
                     </button>
 
-                    <button class="next-btn" onclick="previousZikrManual()" id="previous-btn">
+                    <button class="next-btn" onclick="previousZikrManual()" id="previous-btn" aria-label="الذكر السابق">
                         <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-                        <span>السابق</span>
                     </button>
 
                     <button class="reset-item-btn" onclick="resetCurrentCount()" title="تصفير العداد للذكر">
