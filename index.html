@@ -320,6 +320,9 @@
             flex-wrap: nowrap;
             align-items: center;
             justify-content: space-between;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
             margin-top: 24px;
             padding-top: 16px;
             border-top: 1px solid var(--card-border);
@@ -332,6 +335,7 @@
             border: none;
             touch-action: none;
             padding: 14px 22px;
+            min-height: 48px;
             border-radius: 16px;
             font-size: 18px;
             font-weight: 700;
@@ -725,6 +729,14 @@
                 } else if ('ontouchstart' in window) {
                     counterButton.addEventListener('touchstart', countFromDirectPress, { passive: false });
                 }
+
+                counterButton.addEventListener('touchend', function(event) {
+                    event.preventDefault();
+                }, { passive: false });
+
+                counterButton.addEventListener('dblclick', function(event) {
+                    event.preventDefault();
+                });
 
                 counterButton.addEventListener('keydown', function(event) {
                     if (event.key !== 'Enter' && event.key !== ' ') return;
