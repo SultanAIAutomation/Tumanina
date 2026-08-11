@@ -290,6 +290,18 @@
             border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
+        .zikr-note {
+            font-size: 12px;
+            color: var(--subtext);
+            background: var(--card-border);
+            padding: 12px;
+            border-radius: 14px;
+            text-align: right;
+            margin-top: 14px;
+            line-height: 1.6;
+            border: 1px solid transparent;
+        }
+
         .controls {
             display: flex;
             align-items: center;
@@ -434,6 +446,7 @@
                 <div>
                     <p class="zikr-text" id="zikr-text"></p>
                     <div class="zikr-benefit hidden" id="zikr-benefit"></div>
+                    <div class="zikr-note hidden" id="zikr-note"></div>
                 </div>
 
                 <div class="controls">
@@ -595,6 +608,14 @@
                     benefitBox.classList.remove('hidden');
                 } else {
                     benefitBox.classList.add('hidden');
+                }
+
+                var noteBox = document.getElementById('zikr-note');
+                if (currentZikr.note) {
+                    noteBox.innerText = currentZikr.note;
+                    noteBox.classList.remove('hidden');
+                } else {
+                    noteBox.classList.add('hidden');
                 }
 
                 var total = currentSection.items.length;
