@@ -50,7 +50,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            touch-action: manipulation;
             transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        button {
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .container {
@@ -466,7 +473,7 @@
                 </div>
 
                 <div class="controls">
-                    <button class="counter-btn" onclick="incrementCounter()" id="counter-btn">
+                    <button class="counter-btn" onclick="incrementCounter(event)" id="counter-btn">
                         <span id="counter-current">0</span> / <span id="counter-target" style="opacity: 0.7; font-size: 14px;">0</span>
                     </button>
 
@@ -666,8 +673,9 @@
             } catch (e) {}
         }
 
-        function incrementCounter() {
+        function incrementCounter(event) {
             try {
+                if (event) event.preventDefault();
                 if (!currentSection || !currentSection.items) return;
                 var currentZikr = currentSection.items[activeIndex];
                 if (activeZikrCount < currentZikr.count) {
