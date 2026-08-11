@@ -97,6 +97,12 @@
             justify-content: center;
         }
 
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .header-title {
             text-align: center;
             margin-bottom: 24px;
@@ -409,9 +415,14 @@
                 </div>
                 <span>طمأنينة</span>
             </div>
-            <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">
-                <svg class="icon-svg" id="theme-icon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-            </button>
+            <div class="nav-actions">
+                <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">
+                    <svg class="icon-svg" id="theme-icon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                </button>
+                <button class="theme-btn" onclick="cycleFontSize()" id="font-size-btn" aria-label="تكبير خط الذكر" title="تكبير خط الذكر">
+                    <span aria-hidden="true">أ<sup>+</sup></span>
+                </button>
+            </div>
         </nav>
 
         <div id="dashboard-view">
@@ -457,6 +468,11 @@
                     <button class="next-btn" onclick="nextZikrManual()">
                         <span>التالي</span>
                         <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+                    </button>
+
+                    <button class="next-btn" onclick="previousZikrManual()" id="previous-btn">
+                        <svg class="icon-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+                        <span>السابق</span>
                     </button>
 
                     <button class="reset-item-btn" onclick="resetCurrentCount()" title="تصفير العداد للذكر">
@@ -512,6 +528,9 @@
         var activeIndex = 0;
         var activeZikrCount = 0;
         var progressData = safeGetStorage('azkar_user_progress', {});
+        var fontSizes = [19, 23, 27];
+        var currentFontSize = safeGetStorage('azkar_font_size', 19);
+        if (fontSizes.indexOf(currentFontSize) === -1) currentFontSize = 19;
 
         function initDashboard() {
             try {
@@ -631,6 +650,14 @@
 
                 document.getElementById('counter-current').innerText = activeZikrCount;
                 document.getElementById('counter-target').innerText = currentZikr.count;
+
+                var previousBtn = document.getElementById('previous-btn');
+                if (previousBtn) {
+                    var isFirstZikr = activeIndex === 0;
+                    previousBtn.disabled = isFirstZikr;
+                    previousBtn.style.opacity = isFirstZikr ? '0.4' : '1';
+                    previousBtn.style.pointerEvents = isFirstZikr ? 'none' : 'auto';
+                }
             } catch (e) {}
         }
 
@@ -660,6 +687,16 @@
         function nextZikrManual() {
             try {
                 activeIndex++;
+                activeZikrCount = 0;
+                saveProgress();
+                renderZikr();
+            } catch (e) {}
+        }
+
+        function previousZikrManual() {
+            try {
+                if (activeIndex === 0) return;
+                activeIndex--;
                 activeZikrCount = 0;
                 saveProgress();
                 renderZikr();
@@ -718,6 +755,20 @@
             initDashboard();
         }
 
+        function applyFontSize() {
+            var zikrText = document.getElementById('zikr-text');
+            if (zikrText) zikrText.style.fontSize = currentFontSize + 'px';
+        }
+
+        function cycleFontSize() {
+            try {
+                var currentIndex = fontSizes.indexOf(currentFontSize);
+                currentFontSize = fontSizes[(currentIndex + 1) % fontSizes.length];
+                safeSetStorage('azkar_font_size', currentFontSize);
+                applyFontSize();
+            } catch (e) {}
+        }
+
         function toggleTheme() {
             try {
                 var isDark = document.documentElement.classList.toggle('dark');
@@ -746,6 +797,7 @@
             updateThemeIcon(false);
         }
 
+        applyFontSize();
         initDashboard();
 
         try {
