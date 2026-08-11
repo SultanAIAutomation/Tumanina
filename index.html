@@ -330,6 +330,7 @@
             background-color: var(--accent);
             color: #ffffff;
             border: none;
+            touch-action: none;
             padding: 14px 22px;
             border-radius: 16px;
             font-size: 18px;
@@ -473,7 +474,7 @@
                 </div>
 
                 <div class="controls">
-                    <button class="counter-btn" onclick="incrementCounter(event)" id="counter-btn">
+                    <button class="counter-btn" id="counter-btn">
                         <span id="counter-current">0</span> / <span id="counter-target" style="opacity: 0.7; font-size: 14px;">0</span>
                     </button>
 
@@ -673,9 +674,8 @@
             } catch (e) {}
         }
 
-        function incrementCounter(event) {
+        function incrementCounter() {
             try {
-                if (event) event.preventDefault();
                 if (!currentSection || !currentSection.items) return;
                 var currentZikr = currentSection.items[activeIndex];
                 if (activeZikrCount < currentZikr.count) {
@@ -703,6 +703,40 @@
                 activeZikrCount = 0;
                 saveProgress();
                 renderZikr();
+            } catch (e) {}
+        }
+
+        var lastCounterPointerTime = 0;
+
+        function initCounterButton() {
+            try {
+                var counterButton = document.getElementById('counter-btn');
+                if (!counterButton) return;
+
+                var countFromDirectPress = function(event) {
+                    event.preventDefault();
+                    if (typeof event.button === 'number' && event.button !== 0) return;
+                    lastCounterPointerTime = Date.now();
+                    incrementCounter();
+                };
+
+                if ('PointerEvent' in window) {
+                    counterButton.addEventListener('pointerdown', countFromDirectPress);
+                } else if ('ontouchstart' in window) {
+                    counterButton.addEventListener('touchstart', countFromDirectPress, { passive: false });
+                }
+
+                counterButton.addEventListener('keydown', function(event) {
+                    if (event.key !== 'Enter' && event.key !== ' ') return;
+                    event.preventDefault();
+                    incrementCounter();
+                });
+
+                counterButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    if (Date.now() - lastCounterPointerTime < 400) return;
+                    incrementCounter();
+                });
             } catch (e) {}
         }
 
@@ -811,6 +845,7 @@
         }
 
         applyFontSize();
+        initCounterButton();
         initDashboard();
 
         try {
