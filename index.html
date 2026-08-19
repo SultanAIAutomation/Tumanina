@@ -293,27 +293,11 @@
         }
 
         .zikr-text {
+            font-family: 'UthmanicHafs', 'Traditional Arabic', serif;
             font-size: 1em;
-            line-height: 1.8;
-            font-weight: 500;
-            white-space: pre-line;
-        }
-
-        .quran-text {
-            font-family: 'UthmanicHafs', 'Traditional Arabic', serif;
             line-height: 2.6;
-            font-size: 1.3em;
             font-weight: 400;
-        }
-
-        .quran-text .quran-segment {
-            font-family: 'UthmanicHafs', 'Traditional Arabic', serif;
-        }
-
-        .quran-text .non-quran-segment {
-            font-family: 'Tajawal', 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 0.76923077em;
-            font-weight: 500;
+            white-space: pre-line;
         }
 
         .zikr-benefit {
@@ -668,7 +652,7 @@
 
                 var currentZikr = currentSection.items[activeIndex];
                 var zikrText = document.getElementById('zikr-text');
-                renderZikrText(zikrText, currentZikr.text);
+                zikrText.textContent = currentZikr.text;
                 applyFontSize();
                 
                 var benefitBox = document.getElementById('zikr-benefit');
@@ -703,50 +687,6 @@
                     previousBtn.style.pointerEvents = isFirstZikr ? 'none' : 'auto';
                 }
             } catch (e) {}
-        }
-
-        function appendZikrSegment(container, text, className) {
-            var segment = document.createElement('span');
-            segment.className = className;
-            segment.textContent = text;
-            container.appendChild(segment);
-        }
-
-        function renderZikrText(textElement, text) {
-            if (!textElement) return;
-
-            var hasUthmaniText = /[ٱۥۦ۟ۚۗۖ]/.test(text);
-            textElement.classList.toggle('quran-text', hasUthmaniText);
-
-            if (!hasUthmaniText) {
-                textElement.textContent = text;
-                return;
-            }
-
-            textElement.textContent = '';
-            var lines = text.split('\n');
-            var istiadhah = 'أَعُوذُ بِاللهِ مِنَ الشَّيْطَانِ الرَّجِيمِ';
-            var basmalah = 'بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ';
-
-            for (var i = 0; i < lines.length; i++) {
-                var line = lines[i];
-
-                if (line === istiadhah || line === basmalah) {
-                    appendZikrSegment(textElement, line, 'non-quran-segment');
-                } else {
-                    var referenceMatch = line.match(/^(.*?)(\s*\[[^\]]+\])$/);
-                    if (referenceMatch) {
-                        appendZikrSegment(textElement, referenceMatch[1], 'quran-segment');
-                        appendZikrSegment(textElement, referenceMatch[2], 'non-quran-segment');
-                    } else {
-                        appendZikrSegment(textElement, line, 'quran-segment');
-                    }
-                }
-
-                if (i < lines.length - 1) {
-                    textElement.appendChild(document.createTextNode('\n'));
-                }
-            }
         }
 
         function incrementCounter() {
