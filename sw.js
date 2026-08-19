@@ -1,8 +1,9 @@
-var CACHE_NAME = 'tumanina-v16';
+var CACHE_NAME = 'tumanina-v17';
 var APP_SHELL = [
     './',
     './index.html',
     './data/azkar.js',
+    './fonts/UthmanicHafs1Ver18.woff2',
     './manifest.json',
     './icons/icon.svg'
 ];
