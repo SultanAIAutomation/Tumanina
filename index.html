@@ -293,11 +293,18 @@
         }
 
         .zikr-text {
-            font-family: 'UthmanicHafs', 'Traditional Arabic', serif;
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 1em;
-            line-height: 2.6;
-            font-weight: 400;
+            line-height: 1.8;
+            font-weight: 500;
             white-space: pre-line;
+        }
+
+        .quran-text {
+            font-family: 'UthmanicHafs', 'Traditional Arabic', serif;
+            line-height: 2.6;
+            font-size: 1.3em;
+            font-weight: 400;
         }
 
         .zikr-benefit {
@@ -652,6 +659,8 @@
 
                 var currentZikr = currentSection.items[activeIndex];
                 var zikrText = document.getElementById('zikr-text');
+                var hasUthmaniText = /[ٱۥۦ۟ۚۗۖ]/.test(currentZikr.text);
+                zikrText.classList.toggle('quran-text', hasUthmaniText);
                 zikrText.textContent = currentZikr.text;
                 applyFontSize();
                 
