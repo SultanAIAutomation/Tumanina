@@ -1,9 +1,15 @@
-var CACHE_NAME = 'tumanina-v19';
+var CACHE_NAME = 'tumanina-v20';
 var APP_SHELL = [
     './',
     './index.html',
     './data/azkar.js',
     './fonts/UthmanicHafs1Ver18.woff2',
+    './fonts/thmanyah/thmanyahsans-Regular.woff2',
+    './fonts/thmanyah/thmanyahsans-Medium.woff2',
+    './fonts/thmanyah/thmanyahsans-Bold.woff2',
+    './fonts/thmanyah/thmanyahseriftext-Regular.woff2',
+    './fonts/thmanyah/thmanyahseriftext-Medium.woff2',
+    './fonts/thmanyah/thmanyahseriftext-Bold.woff2',
     './manifest.json',
     './icons/icon.svg'
 ];

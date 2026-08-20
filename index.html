@@ -8,9 +8,55 @@
     <meta name="theme-color" content="#10b981">
     <link rel="apple-touch-icon" href="icons/icon.svg">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- خط Tajawal الأنيق -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'Thmanyah Sans';
+            src: url('./fonts/thmanyah/thmanyahsans-Regular.woff2') format('woff2');
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Thmanyah Sans';
+            src: url('./fonts/thmanyah/thmanyahsans-Medium.woff2') format('woff2');
+            font-display: swap;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: 'Thmanyah Sans';
+            src: url('./fonts/thmanyah/thmanyahsans-Bold.woff2') format('woff2');
+            font-display: swap;
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        @font-face {
+            font-family: 'Thmanyah Serif Text';
+            src: url('./fonts/thmanyah/thmanyahseriftext-Regular.woff2') format('woff2');
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Thmanyah Serif Text';
+            src: url('./fonts/thmanyah/thmanyahseriftext-Medium.woff2') format('woff2');
+            font-display: swap;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: 'Thmanyah Serif Text';
+            src: url('./fonts/thmanyah/thmanyahseriftext-Bold.woff2') format('woff2');
+            font-display: swap;
+            font-style: normal;
+            font-weight: 700;
+        }
+
         @font-face {
             font-family: 'UthmanicHafs';
             src: url('./fonts/UthmanicHafs1Ver18.woff2') format('woff2');
@@ -47,7 +93,7 @@
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
-            font-family: 'Tajawal', 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Thmanyah Sans', 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
@@ -293,7 +339,7 @@
         }
 
         .zikr-text {
-            font-family: 'Tajawal', 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Thmanyah Serif Text', 'UthmanicHafs', 'Traditional Arabic', serif;
             font-size: 1em;
             line-height: 1.8;
             font-weight: 500;
@@ -301,8 +347,8 @@
         }
 
         .quran-text {
-            font-family: 'UthmanicHafs', 'Traditional Arabic', serif;
-            line-height: 2.6;
+            font-family: 'Thmanyah Serif Text', 'UthmanicHafs', 'Traditional Arabic', serif;
+            line-height: 2.2;
             font-size: 1.3em;
             font-weight: 400;
         }
