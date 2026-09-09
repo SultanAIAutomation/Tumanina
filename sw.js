@@ -1,4 +1,4 @@
-var CACHE_NAME = 'tumanina-v20';
+var CACHE_NAME = 'tumanina-v21';
 var APP_SHELL = [
     './',
     './index.html',
@@ -11,7 +11,10 @@ var APP_SHELL = [
     './fonts/thmanyah/thmanyahseriftext-Medium.woff2',
     './fonts/thmanyah/thmanyahseriftext-Bold.woff2',
     './manifest.json',
-    './icons/icon.svg'
+    './icons/icon.svg',
+    './icons/icon-192.png',
+    './icons/icon-512.png',
+    './icons/apple-touch-icon.png'
 ];
 
 self.addEventListener('install', function(event) {
