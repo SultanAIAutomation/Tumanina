@@ -175,6 +175,13 @@ function startSection(sectionId) {
     } catch (e) {}
 }
 
+// حذف علامات الوقف/الإقلاب الزخرفية من النص المعروض فقط (نطاق أضيق بعد المراجعة؛ لا تُحذف حروف المدّ الصغيرة، ولا يُعدَّل مصدر البيانات)
+function stripQuranicSmallMarks(text) {
+    return text
+        .replace(/[\u06D6\u06D7\u06DA\u06E2]/g, '')
+        .replace(/ {2,}/g, ' ');
+}
+
 function renderZikr() {
     try {
         if (!currentSection || !currentSection.items) return;
@@ -187,7 +194,7 @@ function renderZikr() {
         var zikrText = document.getElementById('zikr-text');
         var hasUthmaniText = /[ٱۥۦ۟ۚۗۖ]/.test(currentZikr.text);
         zikrText.classList.toggle('quran-text', hasUthmaniText);
-        zikrText.textContent = currentZikr.text;
+        zikrText.textContent = hasUthmaniText ? stripQuranicSmallMarks(currentZikr.text) : currentZikr.text;
         applyFontSize();
         
         var benefitBox = document.getElementById('zikr-benefit');
