@@ -1,4 +1,4 @@
-var CACHE_NAME = 'tumanina-v22';
+var CACHE_NAME = 'tumanina-v23';
 var APP_SHELL = [
     './',
     './index.html',
